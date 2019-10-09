@@ -37,8 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeRequests()
-                .antMatchers( "/").permitAll()
-                .antMatchers( "/signup").permitAll()
+                .antMatchers( "/", "/signup", "/login").permitAll() // Will need multiple .antMatchers at the point where we need to refine what non-signed in users can do with GET/POSTS, etc
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

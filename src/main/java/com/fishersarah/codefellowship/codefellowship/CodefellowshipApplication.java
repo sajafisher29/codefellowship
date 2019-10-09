@@ -24,6 +24,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //	Hint: this is a relationship between two pieces of data
 //A user’s posts should be visible on their profile page.
 
+// Reference: https://github.com/codefellows/seattle-java-401d6/blob/master/SpringAuthCheatSheet.md
+//			  https://github.com/codefellows/seattle-java-401d6/tree/master/class-16/dragons
+
 @SpringBootApplication
 public class CodefellowshipApplication {
 
