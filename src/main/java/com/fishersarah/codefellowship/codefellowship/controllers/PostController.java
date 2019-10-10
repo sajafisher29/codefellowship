@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 
 @Controller
 public class PostController {
@@ -29,8 +30,8 @@ public class PostController {
     @PostMapping("/addPost")
     public RedirectView addPost(Principal principal, String body){
         ApplicationUser owner = applicationUserRepository.findByUsername(principal.getName());
-
-        Post post = new Post(body, createdAt, owner); //TODO: Need to program assignment of timeStamp
+        String createdAt = LocalDateTime.now().toString();
+        Post post = new Post(body, createdAt, owner);
 
         postRepository.save(post);
 
