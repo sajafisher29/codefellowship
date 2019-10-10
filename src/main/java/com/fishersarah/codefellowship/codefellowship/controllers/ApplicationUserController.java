@@ -59,4 +59,7 @@ public class ApplicationUserController {
         return "userProfile";
     }
 
+    @GetMapping("/myPage")
+    public String getMyPage() { return "myPage"; }
+
 }
