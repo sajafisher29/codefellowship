@@ -1,6 +1,6 @@
 package com.fishersarah.codefellowship.codefellowship.config;
 
-// Reference: // starting point: https://spring.io/guides/gs/securing-web/
+// Reference: https://spring.io/guides/gs/securing-web/
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,18 +34,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .cors().disable()
-                .authorizeRequests()
-                .antMatchers( "/", "/signup", "/login").permitAll() // Will need multiple .antMatchers at the point where we need to refine what non-signed in users can do with GET/POSTS, etc
-                .anyRequest().permitAll()
+                    .csrf().disable()
+                    .cors().disable()
+                    .authorizeRequests()
+                    .antMatchers( "/", "/signup", "/login").permitAll() // Will need multiple .antMatchers at the point where we need to refine what non-signed in users can do with GET/POSTS, etc
+                    .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
+                    .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/")
                 .and()
-                .logout()
-                .logoutSuccessUrl("/");
+                    .logout()
+                    .logoutSuccessUrl("/");
     }
 
     @Override

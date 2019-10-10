@@ -6,15 +6,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CodeFellowship Home Page</title>
+    <title>Add Post Page</title>
 </head>
 
 <body>
 
     <div th:replace = "fragments/nav :: nav"></div>
-
-    <h1>CodeFellowship Home Page</h1>
-    <h2>Hello, [[${username}]]!</h2>
+    <form action = "addPost" method = "post">
+        <label for = "body">Body</label><input type = "text" name = "body" id = "body">
+        <label for = "timeStamp">Time Submitted</label><input type = "text" name = "timeStamp" id = "timeStamp">
+        <input type = "submit" value = "Create post">
+    </form>
 
 </body>
 

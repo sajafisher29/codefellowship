@@ -3,11 +3,9 @@ package com.fishersarah.codefellowship.codefellowship.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -26,10 +24,21 @@ public class ApplicationUser implements UserDetails {
         this.password = password;
     }
 
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+    List<Post> posts;
+
     // ...Why don't we care about this one? Need to find the comment in FrontRow
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
+    }
+
+    public long getId() {
+        return id;
     }
 
     @Override
