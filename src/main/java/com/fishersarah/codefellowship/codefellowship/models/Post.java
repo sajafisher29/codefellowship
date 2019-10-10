@@ -1,6 +1,7 @@
 package com.fishersarah.codefellowship.codefellowship.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Post {
@@ -11,6 +12,18 @@ public class Post {
 
     @ManyToOne
     ApplicationUser owner;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_posts",
+            joinColumns = { @JoinColumn(name = "userClickingFollow")},
+            inverseJoinColumns = {@JoinColumn(name = "userAcceptingTheFollow")}
+    )
+
+    Set<ApplicationUser> usersIHaveFollowed;
+
+    @ManyToMany(mappedBy = "usersIHaveFollowed")
+    Set<ApplicationUser> getUsersIHaveFollowed;
 
     private String body;
     private String createdAt;
