@@ -28,6 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return bCryptPasswordEncoder;
     }
 
+    @Override
     protected void configure(AuthenticationManagerBuilder authentication) throws Exception {
         authentication.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
@@ -38,12 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .csrf().disable()
                     .cors().disable()
                     .authorizeRequests()
-                    .antMatchers( "/", "/signup", "/login").permitAll() // Will need multiple .antMatchers at the point where we need to refine what non-signed in users can do with GET/POSTS, etc
+                    .antMatchers( "/", "/signup", "/login", "/*.css").permitAll() // Will need multiple .antMatchers at the point where we need to refine what non-signed in users can do with GET/POSTS, etc
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/")
+                    .defaultSuccessUrl("/myPage")
                 .and()
                     .logout()
                     .logoutSuccessUrl("/");

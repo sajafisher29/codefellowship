@@ -13,18 +13,6 @@ public class Post {
     @ManyToOne
     ApplicationUser owner;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_posts",
-            joinColumns = { @JoinColumn(name = "userClickingFollow")},
-            inverseJoinColumns = {@JoinColumn(name = "userAcceptingTheFollow")}
-    )
-
-    Set<ApplicationUser> usersIHaveFollowed;
-
-    @ManyToMany(mappedBy = "usersIHaveFollowed")
-    Set<ApplicationUser> getUsersIHaveFollowed;
-
     private String body;
     private String createdAt;
 
@@ -34,14 +22,13 @@ public class Post {
 
     public String getCreatedAt() {
         return createdAt;
-    }
+    } // Need to display a prettier, more user friendly timeStamp
 
     public long getId() {
         return id;
     }
 
     public Post(){};
-
 
     public Post(String body, String createdAt, ApplicationUser owner){
 

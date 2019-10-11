@@ -10,19 +10,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
-
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Controller
-public class PostController {
+public class MyPageController {
 
     @Autowired
     ApplicationUserRepository applicationUserRepository;
 
     @Autowired
     PostRepository postRepository;
+
+//    @GetMapping("/myPage")
+//    public String getMyPage(Principal principal, Model model){
+//        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(principal.getName());
+//        model.addAttribute("user", loggedInUser);
+//        return "myPage";
+//    }
+
+    @GetMapping("/myPage")
+    public String getMyPage(Principal principal, Model model) {
+        ApplicationUser currentUser = applicationUserRepository.findByUsername(principal.getName());
+        model.addAttribute("currentUser", currentUser);
+        return "myPage";
+    }
 
     @GetMapping("/addPost")
     public String showPostForm(){
@@ -37,31 +49,7 @@ public class PostController {
 
         postRepository.save(post);
 
-        return new RedirectView("/users/" + owner.getId());
-    }
-
-    @GetMapping("/follow")
-    public String showUsersFollowed (Model model){
-        List<ApplicationUser> users = ApplicationUserRepository.findAll();
-
-        model.addAttribute("users", users);
-
-        return "newsfeed";
-    }
-
-    @PostMapping("/follow")
-    public RedirectView followUser(Principal principal){ //Need to resolve what is needed here
-        //get users
-        ApplicationUser userClickingFollow = applicationUserRepository.getOne(applicationUser);
-        ApplicationUser userAcceptingTheFollow = applicationUserRepository.getOne(follow);
-
-        // update and save one followed user
-        userClickingFollow.followed(acceptingTheFollow);
-        applicationUserRepository.save(userClickingFollow);
-
-        // send me back to my page
-        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
-        return new RedirectView("/users/" + user.getId() );
+        return new RedirectView("/myPage");
     }
 
 }

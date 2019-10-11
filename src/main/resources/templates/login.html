@@ -9,15 +9,18 @@
 </head>
 
 <body>
-
-    <div th:replace = "fragments/nav :: nav"></div>
+    <header>
+        <div th:replace = "fragments/nav :: nav"></div>
+    </header>
 
     <h1>CodeFellowship Login Page</h1>
 
     <form action="/login" method="POST">
-        <input name="username" />
-        <input name="password" type="password" />
-        <input type="submit" />
+        <label for = "username">Username</label>
+        <input name = "username" />
+        <label for = "password">Username</label>
+        <input name = "password" type="password" />
+        <input type = "submit" />
     </form>
 
 </body>
