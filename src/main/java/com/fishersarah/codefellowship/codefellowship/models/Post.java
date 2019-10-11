@@ -22,7 +22,7 @@ public class Post {
 
     public String getCreatedAt() {
         return createdAt;
-    }
+    } // Need to display a prettier, more user friendly timeStamp
 
     public long getId() {
         return id;

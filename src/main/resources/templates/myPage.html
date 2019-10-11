@@ -19,7 +19,6 @@
         <label for="body">What would you like to post?</label><input type="text" name="body" id = "body">
         <input type="submit" value="Create Post">
     </form>
-<!--        <label for = "timeStamp">Time Submitted</label><input type = "text" name = "timeStamp" id = "timeStamp">-->
 
     <p th:text="${currentUser.username}"></p>
     <th:block th:each="post: ${currentUser.posts}">
