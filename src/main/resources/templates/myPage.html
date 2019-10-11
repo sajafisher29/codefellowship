@@ -11,20 +11,23 @@
 </head>
 
 <body>
-    <div th:replace="fragments/nav :: nav"></div>
+
+    <header>
+        <div th:replace = "fragments/nav :: nav"></div>
+    </header>
 
     <h1>Welcome to your page!</h1>
 
-    <form action="/addPost" method="POST">
-        <label for="body">What would you like to post?</label><input type="text" name="body" id = "body">
-        <input type="submit" value="Create Post">
+    <form action = "/addPost" method = "POST">
+        <label for = "body">What would you like to post?</label><input type = "text" name="body" id = "body">
+        <input type = "submit" value = "Create Post">
     </form>
 
-    <p th:text="${currentUser.username}"></p>
-    <th:block th:each="post: ${currentUser.posts}">
+    <p th:text = "${currentUser.username}"></p>
+    <th:block th:each = "post: ${currentUser.posts}">
         <div>
-            <p th:text="${post.body}"></p>
-            <p th:text="${post.createdAt}"></p>
+            <p th:text = "${post.body}"></p>
+            <p th:text = "${post.createdAt}"></p>
         </div>
     </th:block>
 

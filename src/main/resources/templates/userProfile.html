@@ -11,7 +11,9 @@
 
 <body>
 
-    <div th:replace="fragments/nav :: nav"></div>
+    <header>
+        <div th:replace="fragments/nav :: nav"></div>
+    </header>
 
     <h1>Welcome to [[${viewedUser.username}]]'s profile page</h1>
 

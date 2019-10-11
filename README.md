@@ -1,15 +1,16 @@
 # Code 401: Codefellowship
 ## Lab 17: CodeFellowship Profiles with Login
 ## Lab 18: Following Users on CodeFellowship
+## Lab 19: Polish CodeFellowship
 
 ## Version
 3.0.0 
 
 ## Problem Domain
-Adding SQL/HMTL injection protection, build functionality for users to follow each other, website design, error handling, integration testing.
+Adding SQL/HMTL injection protection, build functionality for users to follow each other, website design, error handling, integration testing. Polish the site!
 
 ## Deployment
-TBD
+Heroku
 
 ## Instructions to run the app on your computer
 - ________ in terminal
@@ -47,6 +48,7 @@ No contribution guidelines at this point.
 - Thymeleaf templates & fragments used appropriately to keep view code DRY.
 - Smooth error handling with appropriate responses to bad requests.
 - Integration testing on (at minimum) the splash page, login, and sign up routes.
+- Polish the site css.
 
 #### Stretch
 - A logged-in user should be able to edit their profile. 
@@ -54,6 +56,9 @@ No contribution guidelines at this point.
 - Double stretch: allow them to change their passwords if they enter their current password.
 - When users create posts, allow them to specify whether or not a post is “public”. Public posts show up in everyone’s feeds.
 - Add the ability for users to comment on posts.
+- Add a notifications system to CodeFellowship. Display a notification to users when people comment on their posts.
+- Using WebSockets, make that notifications system show updates in real time, not just when the page refreshes.
+- Using WebSockets, implement a messaging feature on CodeFellowship.
 
 ## Code style
 Code style is strict Java, HTML, CSS, Spring
