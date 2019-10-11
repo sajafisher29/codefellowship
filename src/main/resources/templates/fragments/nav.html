@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name = "viewport" content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv = "X-UA-Compatible" content = "ie=edge">
+    <th:block th:fragment="css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="/style.css" rel="stylesheet" type="text/css"/>
+    </th:block>
     <title>Nav</title>
 </head>
 
@@ -12,22 +16,18 @@
 
 <section th:fragment = "navBar">
 
-    <nav th:if = "${username}">
-        <h2>Hello, [[${username}]]!</h2>
-        <ul>
-            <li><a href = "/">Home</a></li>
-            <li><a href = "/mypage">MyPage</a></li>
-            <li><a href = "/logout">Logout</a></li>
-        </ul>
+    <nav sec:authorize = "isAuthenticated()">
+        <a href = "/">Home</a>
+        <a href = "/myPage">MyPage</a>
+        <a href = "/newsfeed">Newsfeed</a>
+        <a href = "/logout">Logout</a>
     </nav>
 
-    <nav th:unless = "${username}">
-        <h2>Welcome new user!</h2>
-        <ul>
-            <li><a href = "/">Home</a></li>
-            <li><a href = "/login">Login</a></li>
-            <li><a href = "/signup">Signup</a></li>
-        </ul>
+    <nav sec:authorize = "isAnonymous()">
+        <h2>Welcome little sprout!</h2>
+       <a href = "/">Home</a>
+       <a href = "/login">Login</a>
+       <a href = "/signup">Signup</a>
     </nav>
 
 </section>

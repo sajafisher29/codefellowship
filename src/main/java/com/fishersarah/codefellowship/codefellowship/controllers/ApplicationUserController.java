@@ -2,6 +2,7 @@ package com.fishersarah.codefellowship.codefellowship.controllers;
 
 import com.fishersarah.codefellowship.codefellowship.models.ApplicationUser;
 import com.fishersarah.codefellowship.codefellowship.models.ApplicationUserRepository;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,24 +27,22 @@ public class ApplicationUserController {
     @Autowired
     ApplicationUserRepository applicationUserRepository;
 
-    @GetMapping
+    @GetMapping("/signup")
     public String getSignupPage() {
         return "signup";
     }
 
     @PostMapping("/signup")
-    public RedirectView createNewUser(String username, String password) {
+    public RedirectView createNewUser(String username, String password, String nameFirst, String nameLast, String dateOfBirth, String bio) {
         // create a user
-        ApplicationUser newUser = new ApplicationUser(username, passwordEncoder.encode(password));
-        // TODO: salt & hash the password //I think this is completed, need to double check
-
+        ApplicationUser newUser = new ApplicationUser(username, passwordEncoder.encode(password), nameFirst, nameLast, dateOfBirth, bio);
         // save it to a database
         applicationUserRepository.save(newUser);
         // this auto logs in the user when they sign up
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // send user to homepage now logged in
-        return new RedirectView("/");
+        return new RedirectView("/myPage");
     }
 
     @GetMapping("/login")
@@ -53,13 +52,13 @@ public class ApplicationUserController {
 
     @GetMapping("/users/{id}")
     public String showSingleUser(@PathVariable long id, Principal principal, Model model) {
-
         model.addAttribute("viewedUser", applicationUserRepository.findById(id).get() ); // Optional
         model.addAttribute("user", principal);
         return "userProfile";
     }
 
-    @GetMapping("/myPage")
-    public String getMyPage() { return "myPage"; }
-
+    @GetMapping("/logout")
+    public RedirectView logout() {
+        return new RedirectView("/");
+    }
 }

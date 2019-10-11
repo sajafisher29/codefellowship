@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -16,20 +17,39 @@ public class ApplicationUser implements UserDetails {
 
     String username;
     String password;
+    String nameFirst;
+    String nameLast;
+    String dateOfBirth;
+    String bio;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+    List<Post> postList;
+
+    @ManyToMany
+    @JoinTable(
+            name = "followingUsers",
+            joinColumns = { @JoinColumn(name = "userClickingFollow")},
+            inverseJoinColumns = {@JoinColumn(name = "userAcceptingTheFollow")}
+    )
+    Set<ApplicationUser> usersIFollow;
+
+    @ManyToMany(mappedBy = "usersIFollow")
+    Set<ApplicationUser> usersThatFollowMe;
+
+    public ApplicationUser(String username, String password, String nameFirst, String nameLast, String dateOfBirth, String bio) {
+        this.username = username;
+        this.password = password;
+        this.nameFirst = nameFirst;
+        this.nameLast = nameLast;
+        this.dateOfBirth = dateOfBirth;
+        this.bio = bio;
+    }
 
     public ApplicationUser() {}
 
-    public ApplicationUser(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
     public List<Post> getPosts() {
-        return posts;
+        return postList;
     }
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
-    List<Post> posts;
 
     // ...Why don't we care about this one? Need to find the comment in FrontRow
     @Override
@@ -69,6 +89,41 @@ public class ApplicationUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.postList = posts;
+    }
+
+    public Set<ApplicationUser> getUsersIFollow() {
+        return usersIFollow;
+    }
+
+    public void setUsersIFollow(Set<ApplicationUser> usersIFollow) {
+        this.usersIFollow = usersIFollow;
+    }
+
+    public Set<ApplicationUser> getUsersThatFollowMe() {
+        return usersThatFollowMe;
+    }
+
+    public void setUsersThatFollowMe(Set<ApplicationUser> usersThatFollowMe) {
+        this.usersThatFollowMe = usersThatFollowMe;
+    }
+
+    public void followUser(ApplicationUser userToBeFollowed) { // Need to check this against what I talked about with James
     }
 
 }

@@ -1,10 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Page</title>
 </head>
+
 <body>
+    <div th:replace="fragments/nav :: nav"></div>
+
+    <h1>Welcome to your page!</h1>
+
+    <form action="/addPost" method="POST">
+        <label for="body">What would you like to post?</label><input type="text" name="body" id = "body">
+        <input type="submit" value="Create Post">
+    </form>
+<!--        <label for = "timeStamp">Time Submitted</label><input type = "text" name = "timeStamp" id = "timeStamp">-->
+
+    <p th:text="${currentUser.username}"></p>
+    <th:block th:each="post: ${currentUser.posts}">
+        <div>
+            <p th:text="${post.body}"></p>
+            <p th:text="${post.createdAt}"></p>
+        </div>
+    </th:block>
 
 </body>
+
 </html>
